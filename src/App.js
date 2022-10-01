@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import {BrowserRouter as Router,Route,Routes} from 'react-router-dom'
+import Home from '../src/pages/Home'
+import Starred from '../src/pages/Starred'
+import PageNotFound from './components/PageNotFound';
+import Show from './pages/Show';
+import { ThemeProvider } from 'styled-components';
+const theme = {
+  mainColors: {
+    blue: '#2400ff',
+    gray: '#c6c6c6',
+    dark: '#353535',
+  },
+};
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+    <ThemeProvider theme={theme}>
+    <Router>
+      <Routes>
+        <Route exact path='/' element={<Home/>} />
+        <Route path='/starred' element={<Starred/>}/> 
+        <Route path='/show/:id' element={<Show/>}/> 
+        <Route path="*" element={<PageNotFound />} />
+        <Route >This is 404 page</Route>
+      </Routes>
+      </Router>
+    </ThemeProvider>
+
   );
 }
 
